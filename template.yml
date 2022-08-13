@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  iuser:
+    container_name : iuser-dev
+    hostname : iuser-dev
+    image: iuser/dev_ubuntu_lang
+    privileged: true
+    restart: always
+    ports:
+      - "60000:80"
+      - "60001:22"
+      - "60000-60009:60000-60009/udp"
+      - "60002-60009:60002-60009"
+    volumes:
+      - ../iuser/os/fs/etc/rc.d:/etc/rc.d
+      - ../iuser/os/fs/etc/supervisor.d:/etc/supervisor.d
+      - ../iuser/os/fs/home:/home
+      - ../iuser/os/share:/share
+      - ../iuser/os/ssh/etc/ssh:/etc/ssh
+      
+      - ../iuser/os/ssh/root/.ssh:/root/.ssh
+      - ../iuser/os/fs/root:/root
+      
+      - /tmp/iuser/dev/tmp:/tmp
+      - /tmp/iuser/dev/log:/var/log
+
+networks:
+  default:
+    name: iuser-dev

@@ -1,0 +1,7 @@
+if [ -z "$1" ]; then
+arg=/root/.tmux_default
+else
+arg=${@:1:$#}
+fi
+
+mosh idev -ssh="ssh -p 60001" -p 60000:60009 $arg
